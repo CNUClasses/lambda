@@ -20,15 +20,13 @@ void printVector(vector<int> v) {
 
 //functor (has operator ()
 struct comp_f {
-	comp_f() {
-		;
-	}
+	comp_f() {}
 	bool operator()(int i, int j) {
 		return (j > i);
 	}
 };
 
-//for cort
+//for compare
 bool compare(int i, int j) {
 	return (j > i);
 }
@@ -37,22 +35,20 @@ void compare_function_functor_lambda() {
 	std::cout << "In compare_function_functor_lambda" << endl;
 	vector<int> v { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
 
-	int n = v.size();
-
 	printVector(v);
 
 	//sort the vector by function (requires external function)
-	sort(v.begin(), v.end(), compare);
+//	sort(v.begin(), v.end(), compare);
 
 	//sort by functor (requires external function)
-	comp_f fcmp;
-	bool bGreater = fcmp(1, 2);	//acts as a function call
-	sort(v.begin(), v.end(), fcmp);
-
-	//	sort(v.begin(), v.end(), comp_f());
+	//comp_f fcmp;
+	//bool bGreater = fcmp(1, 2);	//acts as a function call
+	//sort(v.begin(), v.end(), fcmp);
+	//	sort(v.begin(), v.end(), comp_f());	//alternate
 
 	//sort by lambda (self contained)
-//	sort(v.begin(), v.end(), [](int i,int j)->bool{return i<j;});
+	//sort(v.begin(), v.end(), [](int i,int j)->bool{return i<j;});
+	sort(v.begin(), v.end(), [](int i,int j){return i<j;});		//let compiler infer return type
 
 	printVector(v);
 	std::cout << endl << endl;
@@ -96,7 +92,7 @@ void demoLambda() {
 	// duplicate comes together)
 	p = unique(v.begin(), v.end(), [](int a, int b)
 	{
-		return a == b;
+		return a == b;	
 	});
 
 	// resizing vector to make size equal to total different number
